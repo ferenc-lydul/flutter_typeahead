@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_typeahead/src/common/base/suggestions_controller.dart';
 import 'package:flutter_typeahead/src/common/base/types.dart';
 
@@ -58,17 +57,9 @@ abstract final class TypeAheadCupertinoDefaults {
         listenable: controller,
         builder: (context, _) {
           final bool highlighted = controller.highlightedSuggestion == item;
-          if (highlighted) {
-            // scroll to the highlighted item
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              Scrollable.ensureVisible(context, alignment: 0.5);
-            }, debugLabel: 'TypeAheadField.CupertinoDefaults.itemBuilder');
-          }
           return Container(
             decoration: BoxDecoration(
-              color: highlighted
-                  ? CupertinoColors.systemGrey4.withOpacity(0.5)
-                  : null,
+              color: highlighted ? CupertinoColors.systemGrey4.withOpacity(0.5) : null,
               borderRadius: const BorderRadius.all(Radius.circular(12)),
             ),
             child: FocusableActionDetector(

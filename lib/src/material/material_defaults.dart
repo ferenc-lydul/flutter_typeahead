@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_typeahead/src/common/base/suggestions_controller.dart';
 import 'package:flutter_typeahead/src/common/base/types.dart';
 
@@ -55,12 +54,6 @@ abstract final class TypeAheadMaterialDefaults {
         listenable: controller,
         builder: (context, _) {
           final bool highlighted = controller.highlightedSuggestion == item;
-          if (highlighted) {
-            // scroll to the highlighted item
-            SchedulerBinding.instance.addPostFrameCallback((_) {
-              Scrollable.ensureVisible(context, alignment: 0.5);
-            }, debugLabel: 'TypeAheadField.MaterialDefaults.itemBuilder');
-          }
           return Container(
             color: highlighted ? Theme.of(context).hoverColor : null,
             child: InkWell(
